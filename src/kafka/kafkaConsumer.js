@@ -1,6 +1,7 @@
 var kafka = require('kafka-node')
 import topics from './commons/kafkaTopics'
 var Consumer = kafka.Consumer;
+import createSchemaCassandra from '../cassandra/cassandra';
 var host = process.env.KAFKA_HOST || '127.0.0.1';
 var port = process.env.KAFKA_PORT || '2181';
 var client = new kafka.Client(host + ':' + port) // Can give IP here if want to connect to different server as "localhost:2181"
@@ -26,6 +27,7 @@ function consumingKafkaQueue() {
     consumer.on('message', function (message) {
         console.log(message)
         if (message.topic == 'auditLogs') {
+            createSchemaCassandra(message.value);
             console.log('The message going to send to store in DB is :', JSON.stringify(message.value));
             //insertIntoTableCassandra(message)  // Insertion into cassandra
         }
