@@ -8,6 +8,6 @@ Start Kafka :
 ```bin/kafka-server-start.sh config/server.properties ```
 
 Give permissions to start.sh file in src directory
-Run: ./start.sh
+create kafka topics and consume logs by running : ```./start.sh``` in src directory.
 
 
