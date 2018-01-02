@@ -1,7 +1,7 @@
 var cassandra = require('cassandra-driver')
 
 var client = new cassandra.Client({
-    contactPoints: ['13.59.46.187:9042'] // Insert the dev IP here
+    contactPoints: ['10.0.2.16:9042'] // Insert the dev IP here
 });
 
 function createKeyspace() {
@@ -48,7 +48,7 @@ export function createSchemaCassandra(newObject) {
             return insertData(newObject)
         })
         .then(function () {
-            //client.shutdown();
+            // client.shutdown();
         })
         .catch(function (err) {
             console.error('There was an error', err);
@@ -58,6 +58,7 @@ export function createSchemaCassandra(newObject) {
 
 
 
+module.exports= {createSchemaCassandra};
 // var obj = {"userId":"nrT5d5B8ct8pLyZSi",
 // "userName":"platformadmin@moolya.global",
 // "collectionName":"MlSubChapters",
