@@ -33,7 +33,7 @@ function insertData(newObject){
 }
 
 
-function createSchemaCassandra(newObject) {
+export function createSchemaCassandra(newObject) {
     client.connect()
         .then(function () {
             return createKeyspace()
@@ -48,7 +48,7 @@ function createSchemaCassandra(newObject) {
             return insertData(newObject)
         })
         .then(function () {
-            client.shutdown();
+            //client.shutdown();
         })
         .catch(function (err) {
             console.error('There was an error', err);
@@ -58,7 +58,6 @@ function createSchemaCassandra(newObject) {
 
 
 
-exports.createSchemaCassandra = createSchemaCassandra; 
 // var obj = {"userId":"nrT5d5B8ct8pLyZSi",
 // "userName":"platformadmin@moolya.global",
 // "collectionName":"MlSubChapters",
