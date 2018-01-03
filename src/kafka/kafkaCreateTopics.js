@@ -1,6 +1,6 @@
 var kafka = require('kafka-node')
 var Producer = kafka.Producer
-var host = process.env.KAFKA_HOST || '10.0.2.16';
+var host = process.env.KAFKA_HOST || '127.0.0.1';
 var port = process.env.KAFKA_PORT || '2181';
 var client = new kafka.Client(host + ':' + port) // Can give IP here if want to connect to different server as "localhost:2181"
 var producer = new Producer(client);

@@ -1,7 +1,8 @@
 var cassandra = require('cassandra-driver')
 
 var client = new cassandra.Client({
-    contactPoints: ['10.0.2.16:9042'] // Insert the dev IP here
+    // contactPoints: ['10.0.2.16:9042'] // Insert the dev IP here
+    contactPoints: ['127.0.0.1:9042'] // Insert the dev IP here
 });
 
 function createKeyspace() {
@@ -59,17 +60,3 @@ export function createSchemaCassandra(newObject) {
 
 
 module.exports= {createSchemaCassandra};
-// var obj = {"userId":"nrT5d5B8ct8pLyZSi",
-// "userName":"platformadmin@moolya.global",
-// "collectionName":"MlSubChapters",
-// "url":"http://localhost:3000/admin/chapters/hwzPbwq5saa6LuhHD/DT9Y8iQEKuGa3f7R6/QvpiBt9HCGoqFGri5/Moolya-Ahmedabad/subChapterDetails",
-// "docId":"QvpiBt9HCGoqFGri5",
-// "action":"E",
-// "field":"subChapterDisplayName",
-// "previousValue":"\"Moolyad\"",
-// "currentValue":"\"Moolyaddd\"",
-
-// "userAgent":{"OS":"-","ipAddress":"127.0.0.1","browser":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36","deviceModel":"-","deviceType":"-","deviceVendor":"-"},
-
-// "timeStamp":"2017-12-20T10:56:00.247Z","clusterId":"all","chapterId":"all","subChapterId":"all","communityId":"all","communityCode":"all","clusterName":"all","chapterName":"all","subChapterName":"all","moduleName":"SUBCHAPTER","fieldName":"subChapterDisplayName"};
-// createSchemaCassandra(obj);

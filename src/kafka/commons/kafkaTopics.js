@@ -1,2 +1,2 @@
-var topics =  ['auditLogs','accessLogs','systemLogs']
+var topics =  ['auditLogs']
 export default topics;
