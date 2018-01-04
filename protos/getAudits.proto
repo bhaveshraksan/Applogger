@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+
+package getAuditsLogsPkg;
+
+// The greeting service definition.
+service AuditsLogs {
+    // Sends a greeting
+
+    rpc GetAuditLogs (auditRequest) returns (auditReply) {
+
+    }
+}
+
+// The request message containing the user's name.
+message auditRequest {
+    string query = 1;
+    string fieldsProj = 2;
+}
+
+// The response message containing the greetings
+message auditReply {
+    message HistoryAuditLog {
+       string result = 1;
+    }
+    repeated HistoryAuditLog auditlogs = 1;
+    int32 resultCount = 2;
+
+}

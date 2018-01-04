@@ -27,7 +27,7 @@ function consumingKafkaQueue() {
 // Receiving messages on basis of  Topics
     consumer.on('message', function (message) {
         if (message.topic === 'auditLogs') {
-            console.log('The message going to send to store in DB is :', JSON.stringify(message.value));
+            console.log('The message going to send to store in DB is :', JSON.parse(message.value));
             createSchemaCassandra(JSON.parse(message.value));
 
         }
