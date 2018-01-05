@@ -1,16 +1,13 @@
 var PROTO_PATH = __dirname + '/../../protos/getAudits.proto';
 var grpc = require('grpc');
 var audits_proto = grpc.load(PROTO_PATH).getAuditsLogsPkg;
-
-var Audit = require('../../src/model/audit.model');
-
+import fetchAuditLogs from '../cassandra/fetchAuditLogs'
 
 async function getAuditLogs(call, callback) {
     let request = call.request;
-
-    callback(null, {result: historyAuditLogs,resultCount:countAuditLogs});
-
-
+    console.log(request);
+    let logs = await fetchAuditLogs();
+    callback(null, {result: logs,resultCount:10});
 }
 /**
  * Starts an RPC server that receives requests for the Greeter service at the

@@ -19,13 +19,14 @@ function createTypes() {
 
 function createTableInCassandra() {
     var query = "CREATE TABLE IF NOT EXISTS logs.auditLogs" +
-        "(id UUID,userId text,userName text,collectionName text,url text,docId text,action text,field text,previousValue text,currentValue text,timeStamp timestamp,userAgent frozen <userAgentType>,moduleName text, fieldName text,clusterId text,chapterId text,subChapterId text,communityId text,clusterName text,chapterName text,subChapterName text,communityCode text,errorReason text,PRIMARY KEY ((moduleName),id,timestamp, fieldName , previousValue, currentValue, userName,userAgent)) WITH CLUSTERING ORDER BY (  id  ASC,timestamp  ASC, fieldName ASC, previousValue ASC, currentValue ASC, userName ASC,userAgent ASC);"
+        "(id UUID,userId text,userName text,collectionName text,url text,docId text,action text,field text,previousValue text,currentValue text,timeStamp timestamp,userAgent frozen <userAgentType>,moduleName text, fieldName text,clusterId text,chapterId text,subChapterId text,communityId text,clusterName text,chapterName text,subChapterName text,communityCode text,errorReason text,PRIMARY KEY ((moduleName),timestamp,id)) WITH CLUSTERING ORDER BY ( timestamp  DESC,id DESC);"
     return client.execute(query);
 
 }
 
 function insertData(newObject) {
     newObject.id = uuidv4();
+    console.log("UUID",  newObject.id );
     var insertRepo = 'INSERT INTO logs.auditLogs (id,userId,userName,collectionName,url,docId,action,field,previousValue,currentValue,timeStamp,userAgent,moduleName,fieldName,clusterId,chapterId,subChapterId,communityId,clusterName,chapterName,subChapterName,communityCode,errorReason)'
         + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?);';
 

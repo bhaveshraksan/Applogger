@@ -1,10 +1,15 @@
 import client from '../common/cassandraConnection';
 
 
-const query = 'SELECT * FROM logs.auditLogs where moduleName IN ? Limit ? allow filtering;';
+const query = 'SELECT * FROM logs.auditLogs where moduleName IN ? order by timestamp desc Limit ? allow filtering;';
 var moduleNames = ['PROCESSSETUP','ll','Helo'];
 var limit = 10;
-var sort =
+var sortBy = 'desc';
 
-client.execute(query,[moduleNames,limit], { prepare: true })
-    .then(result => console.log('User with email %s', JSON.stringify(result)));
+async function fetchAuditLogs() {
+
+    var results = await client.execute(query,[moduleNames,limit], { prepare: true, fetchSize: 0 });
+    return JSON.stringify(results);
+
+}
+module.exports = fetchAuditLogs

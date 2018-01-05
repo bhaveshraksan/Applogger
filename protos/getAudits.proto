@@ -14,16 +14,13 @@ service AuditsLogs {
 
 // The request message containing the user's name.
 message auditRequest {
-    string query = 1;
-    string fieldsProj = 2;
+    int32 skip = 1;
+    int32 limit = 2;
 }
 
 // The response message containing the greetings
 message auditReply {
-    message HistoryAuditLog {
-       string result = 1;
-    }
-    repeated HistoryAuditLog auditlogs = 1;
+    string result = 1;
     int32 resultCount = 2;
 
 }
