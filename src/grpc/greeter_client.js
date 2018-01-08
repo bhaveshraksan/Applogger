@@ -1,5 +1,4 @@
 var PROTO_PATH = __dirname + '/../../protos/getAudits.proto';
-console.log(PROTO_PATH);
 var grpc = require('grpc');
 var audits_proto = grpc.load(PROTO_PATH).getAuditsLogsPkg;
 

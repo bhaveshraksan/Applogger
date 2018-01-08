@@ -7,27 +7,28 @@ function createKeyspace() {
 
 function createTypes() {
     var query = `CREATE TYPE  IF NOT EXISTS logs.userAgentType ( 
-                   ipAddress text, 
-                   OS text,
-                   browser text, 
-                   deviceModel text, 
-                   deviceType text, 
-                   deviceVendor text
+                   "ipAddress" text, 
+                   "OS" text,
+                   "browser" text, 
+                   "deviceModel" text,
+                   "deviceType" text,
+                   "deviceVendor" text
                 );`
     return client.execute(query);
 }
 
 function createTableInCassandra() {
-    var query = "CREATE TABLE IF NOT EXISTS logs.auditLogs" +
-        "(id UUID,userId text,userName text,collectionName text,url text,docId text,action text,field text,previousValue text,currentValue text,timeStamp timestamp,userAgent frozen <userAgentType>,moduleName text, fieldName text,clusterId text,chapterId text,subChapterId text,communityId text,clusterName text,chapterName text,subChapterName text,communityCode text,errorReason text,PRIMARY KEY ((moduleName),timestamp,id)) WITH CLUSTERING ORDER BY ( timestamp  DESC,id DESC);"
+    var query = 'CREATE TABLE IF NOT EXISTS logs.auditLogs (id UUID,"userId" text,"userName" text,"collectionName" text,"url" text,"docId" text,"action" text,"field" text,"previousValue" text,"currentValue" text,"timeStamp" timestamp,"userAgent" userAgentType,"moduleName" text, "fieldName" text,"clusterId" text,"chapterId" text,"subChapterId" text,"communityId" text,"clusterName" text,"chapterName" text,"subChapterName" text,"communityCode" text,"errorReason" text,PRIMARY KEY ("moduleName","timeStamp",id)) WITH CLUSTERING ORDER BY ( "timeStamp"  DESC);'
+
     return client.execute(query);
 
 }
 
 function insertData(newObject) {
     newObject.id = uuidv4();
+    newObject.userAgent.ipaddress =  newObject.userAgent.ipAddress.toString();
     console.log("UUID",  newObject.id );
-    var insertRepo = 'INSERT INTO logs.auditLogs (id,userId,userName,collectionName,url,docId,action,field,previousValue,currentValue,timeStamp,userAgent,moduleName,fieldName,clusterId,chapterId,subChapterId,communityId,clusterName,chapterName,subChapterName,communityCode,errorReason)'
+    var insertRepo = 'INSERT INTO logs.auditLogs (id,"userId","userName","collectionName","url","docId",action,field,"previousValue","currentValue","timeStamp","userAgent","moduleName","fieldName","clusterId","chapterId","subChapterId","communityId","clusterName","chapterName","subChapterName","communityCode","errorReason")'
         + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?);';
 
     return client.execute(insertRepo,
