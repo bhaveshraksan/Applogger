@@ -8,6 +8,8 @@ Start Kafka :
 ```bin/kafka-server-start.sh config/server.properties ```
 
 Give permissions to start.sh file in src directory
+RUN sudo npm install babel-cli -g
+
 create kafka topics and consume logs by running : ```./start.sh``` in src directory.
 
 
